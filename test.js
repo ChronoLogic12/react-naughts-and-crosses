@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-const Square = (props) => {
+function Square(props) {
 	return (
 		<button className="square" onClick={props.onClick}>
 			{props.value}
 		</button>
 	);
-};
+}
 
 class Board extends React.Component {
 	renderSquare(i) {
@@ -42,7 +42,11 @@ class Game extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			history: [{ squares: Array(9).fill(null) }],
+			history: [
+				{
+					squares: Array(9).fill(null),
+				},
+			],
 			xIsNext: true,
 		};
 	}
@@ -56,7 +60,11 @@ class Game extends React.Component {
 		}
 		squares[i] = this.state.xIsNext ? "X" : "O";
 		this.setState({
-			history: history.concat([{ squares: squares }]),
+			history: history.concat([
+				{
+					squares: squares,
+				},
+			]),
 			xIsNext: !this.state.xIsNext,
 		});
 	}
@@ -68,9 +76,9 @@ class Game extends React.Component {
 
 		let status;
 		if (winner) {
-			status = "winner: " + winner;
+			status = "Winner: " + winner;
 		} else {
-			status = `Next player: ${this.state.xIsNext ? "X" : "O"}`;
+			status = "Next player: " + (this.state.xIsNext ? "X" : "O");
 		}
 
 		return (
